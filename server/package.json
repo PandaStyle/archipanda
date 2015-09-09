@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "async": "^1.4.2",
+    "feed-read": "0.0.1",
+    "good": "^6.3.0",
+    "good-console": "^5.0.3",
+    "handlebars": "^4.0.2",
+    "hapi": "^9.3.1",
+    "lodash": "^3.10.1",
+    "moment": "^2.10.6",
+    "nodemon": "^1.4.1",
+    "vision": "^3.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
