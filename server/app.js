@@ -4,6 +4,7 @@ var async = require('async');
 var feed = require('feed-read');
 var _ = require('lodash');
 var moment = require('moment');
+var cheerio = require('cheerio');
 
 var rssUrls = require('./rss/urls.js');
 
@@ -39,20 +40,25 @@ server.route({
     method: 'GET',
     path:'/rss/{id}',
     handler: function (request, reply) {
+
+
         feed(_.find(rssUrls, { 'id': request.params.id}).url, function (err, result) {
             if (err) {
                 // Somewhere, something went wrong…
             }
-           /* var res = _.map(_.flattenDeep(result), function(item){
+            var res = _.map(result, function(item){
+
+                var $ = cheerio.load(item.content);
                 return {
                     title: item.title,
                     link: item.link,
                     date: item.published,
-                    feed: item.feed
+                    feed: item.feed,
+                    published: item.published,
+                    image: $('img')[0].attribs.src
                 }
-            });*/
-
-            reply(result);
+            });
+            reply(res);
         });
     }
 });
@@ -67,16 +73,20 @@ server.route({
             if (err) {
                 // Somewhere, something went wrong…
             }
-            /* var res = _.map(_.flattenDeep(result), function(item){
-             return {
-             title: item.title,
-             link: item.link,
-             date: item.published,
-             feed: item.feed
-             }
-             });*/
+            var res = _.map(result, function(item){
 
-            return reply.view('index', {res: result});
+                var $ = cheerio.load(item.content);
+                return {
+                    title: item.title,
+                    link: item.link,
+                    date: item.published,
+                    feed: item.feed,
+                    published: item.published,
+                    image: $('img')[0].attribs.src
+                }
+            });
+
+            return reply.view('index', {res: res});
         });
     }
 });
