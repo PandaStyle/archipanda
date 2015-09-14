@@ -9,6 +9,7 @@ var Path = require('path');
 var Inert = require('inert');
 var FeedParser = require('feedparser');
 var request = require('request');
+var parseString = require('xml2js').parseString;
 
 var rssUrls = require('./rss/urls.js');
 var mixChimpUrl = "http://mix.chimpfeedr.com/aa681-archipanda";
@@ -117,27 +118,47 @@ server.route({
 server.route({
     method: 'GET',
     path:'/all',
-    handler: function (request, reply) {
-        feed(mixChimpUrl, function (err, result) {
+    handler: function (req, reply) {
+
+
+        request(mixChimpUrl, function (error, response, body) {
+            if (!error && response.statusCode == 200) {
+                parseString(body, function (err, result) {
+                    var entries = result.feed.entry;
+                    var res = _.map(entries, function(item){
+                  //      var $ = cheerio.load(item.content);
+                        return {
+                            title: item.title,
+                            link: item.link,
+                            date: item.published,
+                            feed: item.feed,
+                            published: item.published,
+                    //        image: $('img')[0].attribs.src,
+                            summary: item.summary
+                        }
+                    });
+                    return reply(result);
+
+                });
+            }
+        })
+
+
+
+
+
+
+
+
+
+        /*feed(mixChimpUrl, function (err, result) {
             if (err) {
                 // Somewhere, something went wrong…
             }
-            var res = _.map(result, function(item){
 
-                var $ = cheerio.load(item.content);
-                return {
-                    title: item.title,
-                    link: item.link,
-                    date: item.published,
-                    feed: item.feed,
-                    published: item.published,
-                    image: $('img')[0].attribs.src,
-                    summary: item.summary
-                }
-            });
             return reply(result);
             //return reply.view('index', {res: res});
-        });
+        });*/
     }
 });
 
