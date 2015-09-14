@@ -1,0 +1,126 @@
+.feed {
+    height: 100%;
+    margin: 0 auto;
+    margin-left: 200px;
+    width: calc(100% - 220px);
+}
+
+.list {
+    margin: 0 auto;
+    clear: both;
+    text-align: center;
+    width: calc(100vw - 220px);
+    margin-top: 10px;
+}
+
+.list li {
+    -moz-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.15);
+    background-color: rgba(255, 255, 255, 0.85);
+    margin: 10px;
+    display: inline-block;
+    -webkit-border-radius: 2px;
+}
+
+.list li a.tile {
+    text-decoration: none;
+    float: left;
+    display: block;
+    width: 100%;
+}
+
+.list li a.tile div.tile-image {
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+   /* background-image: url(../images/load.gif); */
+    min-height: 145px;
+    position: relative;
+    overflow: hidden;
+    -webkit-border-radius: 2px 2px 0 0;
+}
+
+.list li a.tile h2 {
+    padding: 10px 15px;
+    font-size: 13.5px;
+    color: #555;
+    font-weight: 400;
+    text-decoration: none;
+    margin: 0;
+    text-align: left;
+    width: calc(100% - 20px);
+    overflow: hidden;
+    border: 0;
+    display: table-cell;
+    vertical-align: middle;
+    height: 40px;
+    line-height: 20px;
+    overflow: hidden;
+    text-transform: capitalize;
+}
+
+
+@media only screen and (max-width: 800px) {
+    /* line 827, ../sass/muzli.scss */
+    .list li {
+        width: calc((100vw - 260px) / 1) !important;
+        height: calc(((100vw - 260px) / 1.33 ) + 60px) !important;
+        overflow: hidden !important;
+    }
+    /* line 831, ../sass/muzli.scss */
+    .list li .tile-image {
+        height: calc((100vw - 260px) / 1.33) !important;
+    }
+}
+@media only screen and (max-width: 999px) and (min-width: 800px) {
+    /* line 841, ../sass/muzli.scss */
+    .list li {
+        width: calc((100vw - 280px) / 2) !important;
+        height: calc(((100vw - 280px) / 2.66 ) + 60px) !important;
+        overflow: hidden !important;
+    }
+    /* line 845, ../sass/muzli.scss */
+    .list li .tile-image {
+        height: calc((100vw - 280px) / 2.66) !important;
+    }
+
+}
+@media only screen and (max-width: 1499px) and (min-width: 1000px) {
+    /* line 855, ../sass/muzli.scss */
+    .list li {
+        width: calc((100vw - 300px) / 3) !important;
+        height: calc(((100vw - 300px) / 4 ) + 60px) !important;
+        overflow: hidden !important;
+    }
+    /* line 859, ../sass/muzli.scss */
+    .list li .tile-image {
+        height: calc((100vw - 300px) / 4) !important;
+    }
+
+}
+@media only screen and (max-width: 1999px) and (min-width: 1500px) {
+    /* line 869, ../sass/muzli.scss */
+    .list li {
+        width: calc((100vw - 320px) / 4) !important;
+        height: calc(((100vw - 320px) / 5.33 ) + 60px) !important;
+        overflow: hidden !important;
+    }
+    /* line 873, ../sass/muzli.scss */
+    .list li .tile-image {
+        height: calc((100vw - 320px) / 5.33) !important;
+    }
+}
+@media only screen and (max-width: 5000px) and (min-width: 2000px) {
+    /* line 882, ../sass/muzli.scss */
+    .list li {
+        width: calc((100vw - 340px) / 5) !important;
+        height: calc(((100vw - 340px) / 6.66 ) + 60px) !important;
+        overflow: hidden !important;
+    }
+    /* line 886, ../sass/muzli.scss */
+    .list li .tile-image {
+        height: calc((100vw - 340px) / 6.66) !important;
+    }
+
+}

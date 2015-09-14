@@ -3,20 +3,35 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
+    <link rel="stylesheet" href="bower_components/normalize-css/normalize.css"/>
+    <link rel="stylesheet" href="styles/feed.css"/>
     <script src="bower_components/jquery/dist/jquery.js"></script>
 </head>
 <body>
     <div class="feed">
+        <ul class="list"></ul>
     </div>
 </body>
 
 <script>
-    $.ajax('/rss/achinect/view')
+    function getParameterByName(name) {
+        name = name.replace(/[\[]/, "\\[").replace(/[\]]/, "\\]");
+        var regex = new RegExp("[\\?&]" + name + "=([^&#]*)"),
+                results = regex.exec(location.search);
+        return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
+    }
+
+    var rss = getParameterByName("rss");
+
+
+    jQuery.ajax('/all')
         .done(function(res) {
-            console.log(res);
+            $('.feed').html(res);
         })
         .fail(function() {
             alert( "error" );
-        })
+        });
+
+
 </script>
 </html>

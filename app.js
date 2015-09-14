@@ -5,8 +5,13 @@ var feed = require('feed-read');
 var _ = require('lodash');
 var moment = require('moment');
 var cheerio = require('cheerio');
+var Path = require('path');
+var Inert = require('inert');
+var FeedParser = require('feedparser');
+var request = require('request');
 
 var rssUrls = require('./rss/urls.js');
+var mixChimpUrl = "http://mix.chimpfeedr.com/aa681-archipanda";
 
 
 // Create a server with a host and port
@@ -21,6 +26,21 @@ server.connection({
     }
 });
 
+server.register(Inert, function () {});
+
+server.route({
+    method: 'GET',
+    path: '/{param*}',
+    handler: {
+        directory: {
+            path: '.',
+            redirectToSlash: true,
+            index: true
+        }
+    }
+});
+
+
 server.register(require('vision'), function (err) {
 
     server.views({
@@ -32,6 +52,8 @@ server.register(require('vision'), function (err) {
         layoutPath: './views/layout'
     });
 });
+
+
 
 
 
@@ -91,23 +113,39 @@ server.route({
     }
 });
 
-server.route({
-    method: 'GET',
-    path: '/',
-    handler: function(request, reply) {
-        // Render the view with the custom greeting
-        var data = {
-            title: 'This is Index!',
-            message: 'Hello, World. You crazy handlebars layout'
-        };
-
-        return reply.view('index', data);
-    }
-});
-
+// Add the route
 server.route({
     method: 'GET',
     path:'/all',
+    handler: function (request, reply) {
+        feed(mixChimpUrl, function (err, result) {
+            if (err) {
+                // Somewhere, something went wrong…
+            }
+            var res = _.map(result, function(item){
+
+                var $ = cheerio.load(item.content);
+                return {
+                    title: item.title,
+                    link: item.link,
+                    date: item.published,
+                    feed: item.feed,
+                    published: item.published,
+                    image: $('img')[0].attribs.src,
+                    summary: item.summary
+                }
+            });
+            return reply(result);
+            //return reply.view('index', {res: res});
+        });
+    }
+});
+
+
+
+server.route({
+    method: 'GET',
+    path:'/manuall',
     handler: function (request, reply) {
         async.map(rssUrls, function (i, callback) {
             feed(i, callback);
@@ -129,6 +167,8 @@ server.route({
         });
     }
 });
+
+
 
 
 
