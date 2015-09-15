@@ -106,10 +106,11 @@ server.route({
                     feed: item.feed,
                     published: item.published,
                     image: $('img')[0].attribs.src
+
                 }
             });
+            return reply(res);
 
-            return reply.view('index', {res: res});
         });
     }
 });
@@ -121,44 +122,29 @@ server.route({
     handler: function (req, reply) {
 
 
-        request(mixChimpUrl, function (error, response, body) {
-            if (!error && response.statusCode == 200) {
-                parseString(body, function (err, result) {
-                    var entries = result.feed.entry;
-                    var res = _.map(entries, function(item){
-                  //      var $ = cheerio.load(item.content);
-                        return {
-                            title: item.title,
-                            link: item.link,
-                            date: item.published,
-                            feed: item.feed,
-                            published: item.published,
-                    //        image: $('img')[0].attribs.src,
-                            summary: item.summary
-                        }
-                    });
-                    return reply(result);
+        feed(mixChimpUrl, function (err, result) {
+         if (err) {
+         // Somewhere, something went wrong…
+         }
+            var res = _.map(result, function(item){
+                var $ = cheerio.load(item.content);
+                return {
+                    title: item.title,
+                    link: item.link,
+                    date: item.published,
+                    feed: item.feed,
+                    published: item.published,
+                    image: $('img')[0].attribs.src,
+                    diff: moment.duration(moment().diff(moment(new Date(item.published)))).humanize()
+                }
+            });
 
-                });
-            }
-        })
-
+         //return reply(res);
+            return reply.view('index', {res: _.sortByOrder(res, function(item) {return new Date(item.date);}, ['desc'])});
+         });
 
 
 
-
-
-
-
-
-        /*feed(mixChimpUrl, function (err, result) {
-            if (err) {
-                // Somewhere, something went wrong…
-            }
-
-            return reply(result);
-            //return reply.view('index', {res: res});
-        });*/
     }
 });
 
