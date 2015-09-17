@@ -142,9 +142,6 @@ server.route({
          //return reply(res);
             return reply.view('index', {res: _.sortByOrder(res, function(item) {return new Date(item.date);}, ['desc'])});
          });
-
-
-
     }
 });
 

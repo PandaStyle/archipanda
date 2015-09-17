@@ -1,7 +1,7 @@
 .feed {
     height: 100%;
-    margin: 0 auto;
-    margin-left: 200px;
+    margin: 60px auto;
+    margin-left: 20px;
     width: calc(100% - 220px);
 }
 
@@ -41,6 +41,11 @@
     -webkit-border-radius: 2px 2px 0 0;
 }
 
+.list li .tile-title-holder {
+    height: 40px;
+    overflow: hidden;
+}
+
 .list li a.tile h2 {
     padding: 10px 15px;
     font-size: 13.5px;
@@ -49,14 +54,8 @@
     text-decoration: none;
     margin: 0;
     text-align: left;
-    width: calc(100% - 20px);
-    overflow: hidden;
     border: 0;
-    display: table-cell;
-    vertical-align: middle;
-    height: 40px;
     line-height: 20px;
-    overflow: hidden;
     text-transform: capitalize;
 }
 
@@ -122,5 +121,4 @@
     .list li .tile-image {
         height: calc((100vw - 340px) / 6.66) !important;
     }
-
 }
