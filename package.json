@@ -11,6 +11,7 @@
     "good": "^6.3.0",
     "good-console": "^5.0.3",
     "gulp": "^3.9.0",
+    "gulp-sass": "^2.0.4",
     "handlebars": "^4.0.2",
     "hapi": "^9.3.1",
     "inert": "^3.0.1",

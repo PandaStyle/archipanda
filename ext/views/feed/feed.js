@@ -12,7 +12,7 @@ angular.module('feed', ['ngRoute'])
     .controller('feedCtrl', [function() {
         console.log("hello from feed");
 
-        jQuery.ajax('/all')
+        jQuery.ajax('/feed/all')
             .done(function(res) {
                 $('.feed').html(res);
             })

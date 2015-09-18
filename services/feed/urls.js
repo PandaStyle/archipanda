@@ -1,4 +1,6 @@
-module.exports = [
+module.exports.mixChimpUrl = "http://mix.chimpfeedr.com/aa681-archipanda";
+
+module.exports.rssUrls = [
     {
         id: "archidose",
         url: "http://archidose.blogspot.com/feeds/posts/default"
@@ -24,3 +26,6 @@ module.exports = [
         url: "http://archinect.com/news.xml"
     }
 ];
+
+
+
