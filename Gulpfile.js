@@ -1,4 +1,5 @@
 var gulp = require('gulp'),
+    concat = require('gulp-concat'),
     nodemon = require('gulp-nodemon'),
     livereload = require('gulp-livereload'),
     sass = require('gulp-sass');
@@ -23,9 +24,11 @@ gulp.task('watch', function() {
 });
 
 gulp.task('sass', function () {
-    gulp.src('ext/views/**/*.scss')
+    gulp.src(['ext/views/**/*.scss', 'ext/styles/index.scss'])
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./ext/css'));
+        .pipe(gulp.dest('./ext/css'))
+        .pipe(concat('index.css'))
+        .pipe(gulp.dest('./ext/dist/styles'));
 });
 
 gulp.task('sass:watch', function () {

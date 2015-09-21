@@ -11,6 +11,7 @@ var FeedParser = require('feedparser');
 
 var FeedService = require('./services/feed/feed.js');
 var TumblrService = require('./services/tumblr/tumblr.js');
+var InstagramService = require('./services/instagram/instagram.js');
 
 
 // Create a server with a host and port
@@ -90,7 +91,7 @@ server.route({
     handler: function (req, reply) {
         FeedService.getFeedAll(function(err, res){
             if (err) {
-                console.log("Error happened during getFeedAll: ", error);
+                console.log("Error happened during getFeedAll: ", err);
             }
 
             return reply.view('index', {res: _.sortByOrder(res, function(item) {return new Date(item.date);}, ['desc'])});
@@ -113,6 +114,25 @@ server.route({
         });
     }
 });
+
+server.route({
+    method: 'GET',
+    path:'/instagram/all',
+    handler: function (req, reply) {
+        InstagramService.user_media_recent('1114817103', function(err, medias, pagination, remaining, limit) {
+
+        if (err) {
+                console.log("Error happened during instagram: ", err);;
+            }
+
+            reply(medias);
+        });
+    }
+});
+
+
+
+
 
 
 

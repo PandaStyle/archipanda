@@ -48,6 +48,7 @@ angular.module('tumblr', ['ngRoute'])
             NProgress.start();
 
             if(o == 0){
+                //debugger;
                 salvattore.register_grid($('.tumblr')[0]);
             }
 
