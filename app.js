@@ -7,7 +7,7 @@ var cheerio = require('cheerio');
 var Path = require('path');
 var Inert = require('inert');
 var FeedParser = require('feedparser');
-
+var req = require('request');
 
 var FeedService = require('./services/feed/feed.js');
 var TumblrService = require('./services/tumblr/tumblr.js');
@@ -118,15 +118,22 @@ server.route({
 server.route({
     method: 'GET',
     path:'/instagram/all',
-    handler: function (req, reply) {
-        InstagramService.user_media_recent('1114817103', function(err, medias, pagination, remaining, limit) {
+    handler: function (request, reply) {
 
-        if (err) {
-                console.log("Error happened during instagram: ", err);;
+
+       var url = 'https://api.instagram.com/v1/users/self/feed?access_token=1114817103.1fb234f.bb04a01a69e5429bafc7f728c4e7ebd1';
+
+        req(url, function (error, response, body) {
+            if(error){
+                console.log(error);
             }
 
-            reply(medias);
-        });
+            if (!error && response.statusCode == 200) {
+                reply(JSON.parse(body)["data"]);
+            }
+        })
+
+
     }
 });
 
