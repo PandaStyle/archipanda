@@ -129,7 +129,7 @@ server.route({
             }
 
             if (!error && response.statusCode == 200) {
-                reply(JSON.parse(body)["data"]);
+                reply(JSON.parse(body));
             }
         })
 
