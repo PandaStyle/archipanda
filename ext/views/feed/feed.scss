@@ -1,5 +1,23 @@
 .feed-view {
-    .feed {
+    .tile {
+      display: block;
+      min-width: 100px;
+      min-height: 200px;
+
+      &.loading {
+          background-color: black;
+          background-image: url('http://desandro.github.io/imagesloaded/assets/loading.gif');
+      }
+
+      .tile-image{
+        margin: 5px 5px 0px 5px;
+      }
+      img{
+        width: 100%;
+      }
+    }
+
+    /*.feed {
         height: 100%;
         margin: 60px auto;
         margin-left: 20px;
@@ -35,7 +53,7 @@
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-       /* background-image: url(../images/load.gif); */
+       *//* background-image: url(../images/load.gif); *//*
         min-height: 145px;
         position: relative;
         overflow: hidden;
@@ -59,67 +77,5 @@
         line-height: 20px;
         text-transform: capitalize;
     }
-
-
-    @media only screen and (max-width: 800px) {
-        /* line 827, ../sass/muzli.scss */
-        .list li {
-            width: calc((100vw - 260px) / 1) !important;
-            height: calc(((100vw - 260px) / 1.33 ) + 60px) !important;
-            overflow: hidden !important;
-        }
-        /* line 831, ../sass/muzli.scss */
-        .list li .tile-image {
-            height: calc((100vw - 260px) / 1.33) !important;
-        }
-    }
-    @media only screen and (max-width: 999px) and (min-width: 800px) {
-        /* line 841, ../sass/muzli.scss */
-        .list li {
-            width: calc((100vw - 280px) / 2) !important;
-            height: calc(((100vw - 280px) / 2.66 ) + 60px) !important;
-            overflow: hidden !important;
-        }
-        /* line 845, ../sass/muzli.scss */
-        .list li .tile-image {
-            height: calc((100vw - 280px) / 2.66) !important;
-        }
-    }
-    @media only screen and (max-width: 1499px) and (min-width: 1000px) {
-        /* line 855, ../sass/muzli.scss */
-        .list li {
-            width: calc((100vw - 300px) / 3) !important;
-            height: calc(((100vw - 300px) / 4 ) + 60px) !important;
-            overflow: hidden !important;
-        }
-        /* line 859, ../sass/muzli.scss */
-        .list li .tile-image {
-            height: calc((100vw - 300px) / 4) !important;
-        }
-
-    }
-    @media only screen and (max-width: 1999px) and (min-width: 1500px) {
-        /* line 869, ../sass/muzli.scss */
-        .list li {
-            width: calc((100vw - 320px) / 4) !important;
-            height: calc(((100vw - 320px) / 5.33 ) + 60px) !important;
-            overflow: hidden !important;
-        }
-        /* line 873, ../sass/muzli.scss */
-        .list li .tile-image {
-            height: calc((100vw - 320px) / 5.33) !important;
-        }
-    }
-    @media only screen and (max-width: 5000px) and (min-width: 2000px) {
-        /* line 882, ../sass/muzli.scss */
-        .list li {
-            width: calc((100vw - 340px) / 5) !important;
-            height: calc(((100vw - 340px) / 6.66 ) + 60px) !important;
-            overflow: hidden !important;
-        }
-        /* line 886, ../sass/muzli.scss */
-        .list li .tile-image {
-            height: calc((100vw - 340px) / 6.66) !important;
-        }
-    }
+  */
 }

@@ -24,7 +24,7 @@ exported.getFeedAll  = function(callback){
                 date: item.published,
                 feed: item.feed,
                 published: item.published,
-                image: $('img')[0].attribs.src,
+                image: $('img')[0] ? $('img')[0].attribs.src : "ph.jpg",
                 diff: moment.duration(moment().diff(moment(new Date(item.published)))).humanize()
             }
         });

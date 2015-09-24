@@ -35,4 +35,4 @@ gulp.task('sass:watch', function () {
     gulp.watch('ext/views/**/*.scss', ['sass']);
 });
 
-gulp.task('default', ['start', 'watch', 'sass:watch']);
+gulp.task('default', ['start', 'watch', 'sass', 'sass:watch']);

@@ -1,0 +1,26 @@
+{
+  "name": "archipanda",
+  "version": "0.0.0",
+  "homepage": "https://github.com/PandaStyle/archipanda",
+  "authors": [
+    "Nemeth Zsolt <furion1@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "imagesloaded": "~3.1.8",
+    "jquery": "~2.1.4",
+    "jquery-scrollstop": "https://github.com/ssorallen/jquery-scrollstop.git#~1.2.0",
+    "normalize-css": "normalize.css#~3.0.3",
+    "nprogress": "~0.2.0",
+    "salvattore": "~1.0.8",
+    "underscore": "~1.8.3"
+  }
+}
