@@ -1,12 +1,14 @@
 .navbar {
-    z-index: 1;
-    position: fixed;
-    background: #CC9847;
-    padding: 0 15px;
-    border-bottom: solid 1px #e2e2e2;
-    height: 50px;
-    top: 0;
-    width: 100%;
+  text-align: center;
+  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.07);
+  z-index: 1;
+  position: fixed;
+  background: #FFFFFF;
+  padding: 0 15px;
+  border-bottom: solid 2px #A5A5A5;
+  height: 50px;
+  top: 0;
+  width: 100%;
 }
 
 .navbar li {
@@ -19,6 +21,10 @@
 .column {
   float: left;
 }
+.size-1of5 {
+  width: 20%;
+}
+
 .size-1of4 {
   width: 25%;
 }
@@ -42,14 +48,20 @@
   }
 }
 
-@media screen and (min-width: 701px) and (max-width: 850px) {
+@media screen and (min-width: 701px) and (max-width: 1224px) {
   [data-columns]::before {
     content: '3 .column.size-1of3';
   }
 }
 
-@media screen and (min-width: 851px) {
+@media screen and (min-width: 1225px) and (max-width: 1525px) {
   [data-columns]::before {
     content: '4 .column.size-1of4';
+  }
+}
+
+@media screen and (min-width: 1526px)  {
+  [data-columns]::before {
+    content: '5 .column.size-1of5';
   }
 }
