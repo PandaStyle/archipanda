@@ -1,20 +1,34 @@
 .feed-view {
+    .feed {
+        margin: 50px 100px;
+    }
+
     .tile {
-      display: block;
-      min-width: 100px;
-      min-height: 200px;
+        position: relative;
+        display: block;
 
-      &.loading {
-          background-color: black;
-          background-image: url('http://desandro.github.io/imagesloaded/assets/loading.gif');
-      }
+        &.loading {
+            min-height: 200px;
 
-      .tile-image{
-        margin: 5px 5px 0px 5px;
-      }
-      img{
-        width: 100%;
-      }
+        }
+
+        .spinner-holder {
+            position: relative;
+            min-width: 200px;
+        }
+
+        .tile-image{
+            margin: 5px 5px 0px 5px;
+        }
+
+        img{
+            width: 100%;
+              -webkit-transition: all 400ms ease-out;
+              -moz-transition: all 400ms ease-out;
+              -ms-transition: all 400ms ease-out;
+              -o-transition: all 400ms ease-out;
+              transition: all 400ms ease-out;
+        }
     }
 
     /*.feed {

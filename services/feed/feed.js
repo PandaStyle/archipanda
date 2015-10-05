@@ -16,18 +16,18 @@ exported.getFeedAll  = function(callback){
             callback(err, res)
         }
         
-        var res = _.map(result, function(item){
-            var $ = cheerio.load(item.content);
-            return {
-                title: item.title,
-                link: item.link,
-                date: item.published,
-                feed: item.feed,
-                published: item.published,
-                image: $('img')[0] ? $('img')[0].attribs.src : "ph.jpg",
-                diff: moment.duration(moment().diff(moment(new Date(item.published)))).humanize()
-            }
-        });
+        var res = _.take(_.map(result, function(item){
+                        var $ = cheerio.load(item.content);
+                        return {
+                            title: item.title,
+                            link: item.link,
+                            date: item.published,
+                            feed: item.feed,
+                            published: item.published,
+                            image: $('img')[0] ? $('img')[0].attribs.src : "ph.jpg",
+                            diff: moment.duration(moment().diff(moment(new Date(item.published)))).humanize()
+                        }
+                 }), 10);
 
         callback(err, res);
     });

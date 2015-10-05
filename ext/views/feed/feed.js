@@ -37,16 +37,21 @@ angular.module('feed', ['ngRoute'])
 
         function appendPosts(results){
             _.each(results, function(value, key, list){
-                var item = $('<a href="" class="tile loading">\
-                               <div class="tile-image"><img src="' + value.image +'" alt=""/></div>\
+                var item = $('<a href="" class="tile">\
+                               <div class="tile-image"><img src="' + value.image +'" alt="" style="opacity: 0"/></div>\
                             </a>');
-
                 salvattore.append_elements($('.feed')[0], [item[0]]);
-                item.imagesLoaded()
-                    .done(function(imgl) {
-                        $(imgl.elements[0]).removeClass('loading');
-                    });
             });
+
+            $('.feed').imagesLoaded()
+                .done(function(imgl) {
+                    $('.spinner').hide();
+
+                    $('.tile').each(function( index, element ) {
+
+                        $(element).find('img').css( "opacity", "1" );
+                    });
+                });
 
         }
     });
