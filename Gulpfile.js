@@ -18,7 +18,7 @@ var cssFiles = [
 
 
 gulp.task('reload', function() {
-    livereload.reload();
+    livereload.reload('index.html')
 });
 
 
@@ -26,6 +26,7 @@ gulp.task('watch', function() {
     livereload.listen();
     gulp.watch(jsFiles, ['reload']);
     gulp.watch(cssFiles, ['sass', 'reload']);
+    gulp.watch('ext/styles/index.scss', ['sass']);
 });
 
 gulp.task('sass', function () {
