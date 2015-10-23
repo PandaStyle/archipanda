@@ -1,18 +1,66 @@
-.navbar {
-  text-align: center;
-  box-shadow: 2px 2px 5px 0px rgba(0,0,0,0.07);
-  z-index: 1;
-  position: fixed;
-  background: #FFFFFF;
-  padding: 0 15px;
-  border-bottom: solid 2px #A5A5A5;
-  height: 50px;
-  top: 0;
-  width: 100%;
+@import "globals";
+
+body{
+  font-family: 'Questrial', sans-serif;
+  font-size: 16px;
 }
 
-.navbar li {
+.navbar {
+  z-index: 1;
+  background: #FFFFFF;
+  top: 0;
+  box-shadow: 0 0 1px rgba(0,0,0,0.15);
+
+  padding-left: 43px;
+  padding-right: 50px;
+
+  .logo {
+    float: left;
+  }
+  
+  .logo img{
+    opacity: 0.75;
+    height: 55px;
+  }
+
+
+  ul.menu {
+    margin-left: 30px;
     display: inline-block;
+    padding-top: 3px;
+  }
+
+  li {
+    display: inline-block;
+
+    a {
+      padding: 18px 20px;
+      text-decoration: none;
+      color: $grey;
+    }
+    a:hover{
+      @include defaulttransition();
+      color: $dark-grey;
+    }
+    &.active a{
+      color: $dark-grey;
+      border-bottom: 2px solid $red;
+    }
+  }
+
+  .hamburger {
+    float: right;
+    margin: 16px;
+    display: block;
+    font-size: 23px;
+    float: right;
+    color: $dark-grey;
+  }
+}
+
+
+.grid {
+  margin: 20px 50px;
 }
 
 
@@ -36,32 +84,28 @@
 }
 
 /* Configurate salvattore with media queries */
-@media screen and (max-width: 450px) {
+@media screen and (max-width: 700px) {
   [data-columns]::before {
     content: '1 .column';
   }
 }
 
-@media screen and (min-width: 451px) and (max-width: 700px) {
+@media screen and (min-width: 700px) and (max-width: 1200px) {
   [data-columns]::before {
     content: '2 .column.size-1of2';
   }
 }
 
-@media screen and (min-width: 701px) and (max-width: 1224px) {
+@media screen and (min-width: 1200px) and (max-width: 1525px) {
   [data-columns]::before {
     content: '3 .column.size-1of3';
   }
+
 }
 
-@media screen and (min-width: 1225px) and (max-width: 1525px) {
+@media screen and (min-width: 1525px) {
   [data-columns]::before {
     content: '4 .column.size-1of4';
   }
 }
 
-@media screen and (min-width: 1526px)  {
-  [data-columns]::before {
-    content: '5 .column.size-1of5';
-  }
-}

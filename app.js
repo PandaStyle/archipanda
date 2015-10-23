@@ -89,7 +89,47 @@ server.route({
     method: 'GET',
     path:'/feed/all',
     handler: function (req, reply) {
-        FeedService.getFeedAll(function(err, res){
+        FeedService.getFeedAll(function(err, res) {
+            if (err) {
+                console.log("Error happened during getFeedAll: ", err);
+            }
+
+            return reply(
+                {
+                    res: _.take(
+                        _.sortByOrder(res, function (item) {
+                            return new Date(item.date);
+                        }, ['desc']),
+                        25)
+                });
+        });
+    }
+});
+
+
+server.route({
+    method: 'GET',
+    path:'/feed/river',
+    handler: function (req, reply) {
+        FeedService.getFeedFromRiver(function(err, res, body) {
+            if (err) {
+                console.log("Error happened during getFeedfromRiver: ", err);
+            }
+
+            return reply(
+                {
+                    res: res
+                });
+        });
+    }
+});
+
+
+server.route({
+    method: 'GET',
+    path:'/feed/nomap',
+    handler: function (req, reply) {
+        FeedService.getNoMap(function(err, res){
             if (err) {
                 console.log("Error happened during getFeedAll: ", err);
             }
@@ -137,8 +177,6 @@ server.route({
 
     }
 });
-
-
 
 
 

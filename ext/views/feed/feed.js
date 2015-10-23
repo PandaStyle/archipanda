@@ -1,5 +1,7 @@
 'use strict';
 
+var s = [];
+
 angular.module('feed', ['ngRoute'])
 
     .config(['$routeProvider', function($routeProvider) {
@@ -12,14 +14,18 @@ angular.module('feed', ['ngRoute'])
     .factory('feedService', function($http){
         return {
             getPosts: function(offset, size) {
-                return $http.get('/feed/all');
+                return $http.get('/feed/river');
             }
         }
     })
 
     .controller('feedCtrl', function(feedService) {
 
-        salvattore.register_grid($('.feed')[0]);
+        var s_grid = $('.feed')[0];
+        var imgLoad = imagesLoaded( s_grid );
+
+        salvattore.register_grid(s_grid);
+
 
         getPosts()
 
@@ -35,19 +41,56 @@ angular.module('feed', ['ngRoute'])
                 });
         }
 
+
         function appendPosts(results){
             _.each(results, function(value, key, list){
-                var item = $('<a href="" class="tile loading">\
+console.log(value.summary);
+                s.push(value.summary);
+
+                console.log("---------------");
+
+
+                var item = $('<div href="" class="tile">\
+                                <a class="overlay" href="' + value.link + '" target="_blank">\
+                                <div class="lay">\
+                                </div>\
+                                </a>\
                                <div class="tile-image"><img src="' + value.image +'" alt=""/></div>\
-                            </a>');
+                                <header>\
+                                    <div class="title">' + value.title + '</div>\
+                                    <div class="summary">' + value.summary +'</div>\
+                                    <div class=meta>\
+                                        <span class="host">' + value.feed + '</span>\
+                                        <span class="sep"> | </span>\
+                                        <span class="diff">' + value.diff + ' ago</span>\
+                                    </div>\
+                                 </header>\
+                            </div>');
 
                 salvattore.append_elements($('.feed')[0], [item[0]]);
-                item.imagesLoaded()
-                    .done(function(imgl) {
-                        $(imgl.elements[0]).removeClass('loading');
-                    });
             });
 
+            imgLoad
+                .on( 'done', function( instance ) {
+                    console.log('DONE  - all images have been successfully loaded');
+                })
+                .on( 'fail', function( instance ) {
+                    console.log('FAIL - all images loaded, at least one is broken');
+                })
+                .on( 'progress', function( instance, image ) {
+                    var result = image.isLoaded ? 'loaded' : 'broken';
+                    console.log( 'image is ' + result + ' for ' + image.img.src );
+                })
+                .on( 'always', function( instance ) {
+                    console.log('ALWAYS - all images have been loaded');
+                });
+        }
+
+        function getHostName(url){
+            var parser = document.createElement('a');
+            parser.href = url;
+
+            return parser.hostname;
         }
     });
 

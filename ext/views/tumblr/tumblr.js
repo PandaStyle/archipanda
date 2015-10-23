@@ -80,10 +80,10 @@ angular.module('tumblr', ['ngRoute'])
                     var url = results[i].photos[0].alt_sizes[0].url;
                 }
 
-                var item = $('<div class="box item">\
+                var item = $('<div class="tile item">\
                                 <a class="overlay" href="' + results[i].post_url + '" target="_blank">\
                                 <div class="lay"></div>\
-                                <i class="flaticon-logotype1 nameicon"></i> <span class="blogname">' + results[i].blog_name  + '</span> \
+                                 <div class="blogname">' + results[i].blog_name  + '</div> \
                                 </a>\
                                 <img src="' + url + '" alt=""/> \
                                 </div>');

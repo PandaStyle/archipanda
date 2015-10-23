@@ -1,5 +1,7 @@
 module.exports.mixChimpUrl = "http://mix.chimpfeedr.com/aa681-archipanda";
 
+module.exports.riverUrl = "http://159.203.105.64/getoneriverjson?fname=archtodate.js";
+;
 module.exports.rssUrls = [
     {
         id: "archidose",
