@@ -11,7 +11,6 @@ var riverUrl = require('./urls.js').riverUrl;
 var exported = module.exports = {};
 
 
-
 exported.getFeedFromRiver = function(callback){
     var feedtime = new Date();
 
@@ -101,7 +100,6 @@ exported.getFeedAll  = function(callback){
     });
 };
 
-
 exported.getNoMap  = function(callback){
     feed(mixChimpUrl, function (err, result) {
         if (err) {
@@ -111,8 +109,6 @@ exported.getNoMap  = function(callback){
         callback(err, result);
     });
 };
-
-
 
 exported.getFeedById  = function(id, callback){
     feed(_.find(rssUrls, { 'id': id}).url, function (err, result) {

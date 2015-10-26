@@ -1,0 +1,5 @@
+./idea
+
+# Dependency directory
+ext/bower_components
+node_modules

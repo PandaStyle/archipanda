@@ -22,12 +22,12 @@ angular.module('feed', ['ngRoute'])
     .controller('feedCtrl', function(feedService) {
 
         var s_grid = $('.feed')[0];
+        var spinner = $('.spinner');
         var imgLoad = imagesLoaded( s_grid );
 
         salvattore.register_grid(s_grid);
 
-
-        getPosts()
+        getPosts();
 
         function getPosts() {
             feedService.getPosts()
@@ -44,11 +44,6 @@ angular.module('feed', ['ngRoute'])
 
         function appendPosts(results){
             _.each(results, function(value, key, list){
-console.log(value.summary);
-                s.push(value.summary);
-
-                console.log("---------------");
-
 
                 var item = $('<div href="" class="tile">\
                                 <a class="overlay" href="' + value.link + '" target="_blank">\
@@ -70,6 +65,7 @@ console.log(value.summary);
                 salvattore.append_elements($('.feed')[0], [item[0]]);
                 item.imagesLoaded()
                     .done(function(imgl) {
+                        spinner.remove();
                         $(imgl.elements[0]).removeClass('loading');
                     });
             });
@@ -89,18 +85,4 @@ console.log(value.summary);
                     console.log('ALWAYS - all images have been loaded');
                 });
         }
-
-        function getHostName(url){
-            var parser = document.createElement('a');
-            parser.href = url;
-
-            return parser.hostname;
-        }
     });
-
-/*<div class="tile-title-holder">\
- <h2 class="tile-title">' + value.title + '</h2>\
- </div>\
- <div class="tile-date-holder">\
- <div class="tile-date">' + value.diff + ' ago</div>\
- </div>\*/
