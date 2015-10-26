@@ -105,13 +105,13 @@ body{
 
 }
 
-@media screen and (min-width: 1525px) {
+@media screen and (min-width: 1526px) and (max-width: 1825px) {
   [data-columns]::before {
     content: '4 .column.size-1of4';
   }
 }
 
-@media screen and (min-width: 1526px)  {
+@media screen and (min-width: 1826px)  {
   [data-columns]::before {
     content: '5 .column.size-1of5';
   }
