@@ -9,8 +9,10 @@
       position: relative;
       min-width: 100px;
       min-height: 200px;
-      margin: 5px 4px 40px;
+      margin: 5px 10px 40px;
       overflow: hidden;
+      background-color: #fff;
+      border-radius: 2px;
 
       &.loading {
           background-color: black;
@@ -51,13 +53,15 @@
         @include defaulttransition();
 
         text-align: left;
-        margin: 10px;
+        margin: 15px;
 
         .title {
-          font-weight: 700;
-          font-size: 22px;
+          letter-spacing: 0px;
+          font-family: 'Playfair Display', serif;
+          font-weight: 900;
+          font-size: 24px;
           line-height: 24px;
-          margin-bottom: 10px
+          margin-bottom: 15px;
         }
 
         .summary {
@@ -71,6 +75,11 @@
 
         .meta {
           font-size: 14px;
+
+          .host {
+            padding-right: 15px;
+            color: $red;
+          }
 
           .sep {
             margin: 0 15px;
@@ -92,7 +101,7 @@
         -o-transform: scale(1.1);
         transform: scale(1.075);
       }
-      
+
       &:hover .overlay .lay {
         opacity: 0.8;
 

@@ -44,11 +44,7 @@ angular.module('feed', ['ngRoute'])
 
         function appendPosts(results){
             _.each(results, function(value, key, list){
-console.log(value.summary);
                 s.push(value.summary);
-
-                console.log("---------------");
-
 
                 var item = $('<div href="" class="tile">\
                                 <a class="overlay" href="' + value.link + '" target="_blank">\
@@ -61,7 +57,6 @@ console.log(value.summary);
                                     <div class="summary">' + value.summary +'</div>\
                                     <div class=meta>\
                                         <span class="host">' + value.feed + '</span>\
-                                        <span class="sep"> | </span>\
                                         <span class="diff">' + value.diff + ' ago</span>\
                                     </div>\
                                  </header>\
