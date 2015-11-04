@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title></title>
     <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,900,700italic' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css"/>
     <link rel="stylesheet" href="bower_components/salvattore/examples/salvattore.css"/>
@@ -34,9 +36,27 @@
             <li ng-class="{ active: isActive('/feed')}"><a class="icon-feed"  href="#/feed"></a></li>
             <li ng-class="{ active: isActive('/tumblr')}"><a class="icon-tumblr" href="#/tumblr"></a></li>
         </ul>
-        <div class="hamburger icon-th-menu"></div>
+        <div class="hamburger button_container" id="toggle">
+            <span class="top"></span>
+            <span class="middle"></span>
+            <span class="bottom"></span>
+        </div>
     </div>
+    <menu>
+        <ul>
+            <li>
+                <a class="bordered" href="">Layouts</a>
+            </li>
+            <li>
+                <a class="bordered" href="">Suggest a feed</a>
+                <input class="suggest" type="text"/>
+            </li>
+            <li>
+                <a class="bordered" href="">About</a>
+            </li>
 
+        </ul>
+    </menu>
 
     <div ng-view></div>
 

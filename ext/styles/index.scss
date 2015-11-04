@@ -1,6 +1,16 @@
 @import "globals";
 
+$color-background: #F5F5F5;
+$color-main: #FF5252;
+$color-active: #FFF;
+$color-link: #FFF;
+
+$button-height: 27px;
+$button-width: 35px;
+
+
 body{
+  background-color: $body-background;
   font-family: 'Questrial', sans-serif;
   font-size: 16px;
 }
@@ -19,7 +29,7 @@ body{
   .logo {
     float: left;
   }
-  
+
   .logo img{
     opacity: 0.75;
     height: 55px;
@@ -57,8 +67,133 @@ body{
     font-size: 23px;
     float: right;
     color: $dark-grey;
+    position: absolute;
+    right: 48px;
+    top: 0;
+
+  }
+  .button_container {
+
+    height: 27px;
+    width: $button-width;
+    cursor: pointer;
+    z-index: 100;
+    transition: opacity .25s ease;
+
+    &:hover {
+      opacity: .7;
+    }
+
+    &.active {
+      .top {
+        transform: translateY(11px) translateX(0) rotate(45deg);
+        background: $color-active;
+      }
+      .middle {
+        opacity: 0;
+        background: $color-active;
+      }
+
+      .bottom {
+        transform: translateY(-11px) translateX(0) rotate(-45deg);
+        background: $color-active;
+      }
+    }
+
+    span {
+      background: $dark-grey;
+      border: none;
+      height: 3px;
+      width: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition:  all .35s ease;
+      cursor: pointer;
+
+      &:nth-of-type(2) {
+        top: 8px;
+      }
+
+      &:nth-of-type(3) {
+        top: 16px;
+      }
+    }
+  }
+
+}
+
+menu {
+  font-family: 'Playfair Display', serif;
+
+  margin: 0;
+  opacity: 1;
+  filter: alpha(opacity=0);
+  position: fixed;
+  height: 100%;
+  width: 100%;
+  z-index: 500;
+  top: 0;
+  left: 0;
+  display: block;
+  background-color: #F1F1F1;
+
+  ul {
+    position: relative;
+    top: 50%;
+    transform: translateY(-70%);
+
+    li {
+      font-size: 3.8rem;
+      line-height: 150%;
+      vertical-align: baseline;
+      list-style: none;
+
+      a {
+        color: $dark-grey;
+        text-decoration: none;
+      }
+
+
+      .bordered {
+        @include defaulttransition();
+        position: relative;
+
+        &:after {
+          height: 3px;
+          width: 0;
+          display: block;
+          background: #17191c;
+          content: "";
+          position: absolute;
+          left: 0;
+          bottom: -3px;
+        }
+        &:hover:after {
+          @include defaulttransition();
+          width: 100%;
+          background: $dark-grey;
+        }
+      }
+
+      .suggest {
+        background: none;
+        border: none;
+        border-radius: 100%;
+        outline: 0;
+        border: 0;
+
+        &:focus, &:active {
+          background: none;
+          border: none;
+        }
+      }
+
+    }
   }
 }
+
+
 
 
 .grid {

@@ -1,10 +1,12 @@
 $red: #DC8A8A;
 $grey: #a8acb5;
+$body-background: #F1F1F1;
 $dark-grey: #56585F;
 $tile-color: beige;
 
 $border-radius : 3px;
 $overlay-hover-color: rgba(0,0,0,.75);
+
 
 @mixin defaulttransition() {
   -webkit-transition: all .2s ease-out;

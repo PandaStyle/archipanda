@@ -44,6 +44,7 @@ angular.module('feed', ['ngRoute'])
 
         function appendPosts(results){
             _.each(results, function(value, key, list){
+                s.push(value.summary);
 
                 var item = $('<div href="" class="tile">\
                                 <a class="overlay" href="' + value.link + '" target="_blank">\
@@ -56,7 +57,6 @@ angular.module('feed', ['ngRoute'])
                                     <div class="summary">' + value.summary +'</div>\
                                     <div class=meta>\
                                         <span class="host">' + value.feed + '</span>\
-                                        <span class="sep"> | </span>\
                                         <span class="diff">' + value.diff + ' ago</span>\
                                     </div>\
                                  </header>\
@@ -85,4 +85,18 @@ angular.module('feed', ['ngRoute'])
                     console.log('ALWAYS - all images have been loaded');
                 });
         }
+
+        function getHostName(url){
+            var parser = document.createElement('a');
+            parser.href = url;
+
+            return parser.hostname;
+        }
     });
+
+/*<div class="tile-title-holder">\
+ <h2 class="tile-title">' + value.title + '</h2>\
+ </div>\
+ <div class="tile-date-holder">\
+ <div class="tile-date">' + value.diff + ' ago</div>\
+ </div>\*/

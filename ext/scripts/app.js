@@ -15,5 +15,10 @@
             $scope.isActive = function (viewLocation) {
                 return viewLocation === $location.path();
             };
+
+            $('#toggle').click(function() {
+                $(this).toggleClass('active');
+                $('#overlay').toggleClass('open');
+            });
     }]);
 
