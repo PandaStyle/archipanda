@@ -22,12 +22,12 @@ angular.module('feed', ['ngRoute'])
     .controller('feedCtrl', function(feedService) {
 
         var s_grid = $('.feed')[0];
+        var spinner = $('.spinner');
         var imgLoad = imagesLoaded( s_grid );
 
         salvattore.register_grid(s_grid);
 
-
-        getPosts()
+        getPosts();
 
         function getPosts() {
             feedService.getPosts()
@@ -63,6 +63,11 @@ angular.module('feed', ['ngRoute'])
                             </div>');
 
                 salvattore.append_elements($('.feed')[0], [item[0]]);
+                item.imagesLoaded()
+                    .done(function(imgl) {
+                        spinner.remove();
+                        $(imgl.elements[0]).removeClass('loading');
+                    });
             });
 
             imgLoad

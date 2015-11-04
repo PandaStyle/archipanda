@@ -15,8 +15,7 @@
       border-radius: 2px;
 
       &.loading {
-          background-color: black;
-          background-image: url('http://desandro.github.io/imagesloaded/assets/loading.gif');
+        min-height: 200px;
       }
 
       .overlay {
@@ -36,14 +35,12 @@
         opacity: 0;
         border-radius: $border-radius;
         z-index: 1;
-
       }
 
       .tile-image {
         overflow: hidden;
 
         img{
-
           border-radius: $border-radius;
           width: 100%;
         }

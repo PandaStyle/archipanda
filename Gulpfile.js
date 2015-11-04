@@ -4,14 +4,18 @@ var gulp = require('gulp'),
     livereload = require('gulp-livereload'),
     sass = require('gulp-sass');
 
+var jsFiles  = [
+    'views/**/*.js',
+    'views/**/*.html',
 
-gulp.task('start', function () {
-    nodemon({
-        script: 'app.js',
-        ext: 'js'
-        , env: { 'NODE_ENV': 'local' }
-    })
-})
+    'scripts/*.js'
+];
+
+var cssFiles = [
+    'ext/views/**/*.scss',
+    'ext/styles/index.scss'
+]
+
 
 gulp.task('reload', function() {
     livereload.reload('index.html')
@@ -20,6 +24,8 @@ gulp.task('reload', function() {
 
 gulp.task('watch', function() {
     livereload.listen();
+    gulp.watch(jsFiles, ['reload']);
+    gulp.watch(cssFiles, ['sass', 'reload']);
     gulp.watch('ext/styles/index.scss', ['sass']);
 });
 
@@ -31,8 +37,14 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./ext/dist/styles'));
 });
 
-gulp.task('sass:watch', function () {
-    gulp.watch('ext/views/**/*.scss', ['sass']);
+
+
+gulp.task('start', function () {
+    nodemon({
+        script: 'app.js',
+        ext: 'js'
+        , env: { 'NODE_ENV': 'local' }
+    })
 });
 
-gulp.task('default', ['start', 'watch', 'sass', 'sass:watch']);
+gulp.task('default', ['start', 'sass', 'watch']);

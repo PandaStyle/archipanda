@@ -134,7 +134,6 @@ server.route({
                 console.log("Error happened during getFeedAll: ", err);
             }
 
-
             return reply({res: _.sortByOrder(res, function(item) {return new Date(item.date);}, ['desc'])});
         });
     }
