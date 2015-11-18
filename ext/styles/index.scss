@@ -136,11 +136,12 @@ menu {
   width: 100%;
   top: 0;
   left: 0;
-  display: block;
+  visibility: hidden;
   z-index: 0;
   background-color: #F1F1F1;
 
   &.open {
+    visibility: visible;
     opacity: 1;
     z-index: 500;
   }

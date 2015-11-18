@@ -4,7 +4,7 @@ var feed = require('feed-read');
 var _ = require('lodash');
 var moment = require('moment');
 var cheerio = require('cheerio');
-var Path = require('path');
+var path = require('path');
 var Inert = require('inert');
 var FeedParser = require('feedparser');
 var req = require('request');
@@ -57,54 +57,18 @@ server.register({
 });
 
 
-
-
 server.route({
     method: 'GET',
     path: '/{param*}',
     handler: {
         directory: {
-            path: '.',
-            redirectToSlash: true,
+            path: path.join(__dirname, '/ext'),
             index: true
         }
     }
 });
 
-server.route({
-    method: 'GET',
-    path:'/feed/{id}',
-    handler: function (request, reply) {
-        FeedService.getFeedAll(function(err, res){
-            if (err) {
-                console.log("Error happened during getFeedAll: ", error);
-            }
 
-            return reply(res);
-        });
-    }
-});
-
-server.route({
-    method: 'GET',
-    path:'/feed/all',
-    handler: function (req, reply) {
-        FeedService.getFeedAll(function(err, res) {
-            if (err) {
-                console.log("Error happened during getFeedAll: ", err);
-            }
-
-            return reply(
-                {
-                    res: _.take(
-                        _.sortByOrder(res, function (item) {
-                            return new Date(item.date);
-                        }, ['desc']),
-                        25)
-                });
-        });
-    }
-});
 
 
 server.route({
@@ -120,21 +84,6 @@ server.route({
                 {
                     res: res
                 });
-        });
-    }
-});
-
-
-server.route({
-    method: 'GET',
-    path:'/feed/nomap',
-    handler: function (req, reply) {
-        FeedService.getNoMap(function(err, res){
-            if (err) {
-                console.log("Error happened during getFeedAll: ", err);
-            }
-
-            return reply({res: _.sortByOrder(res, function(item) {return new Date(item.date);}, ['desc'])});
         });
     }
 });
