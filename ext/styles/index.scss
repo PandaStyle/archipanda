@@ -6,7 +6,7 @@ $button-width: 27px;
 
 body{
   background-color: $body-background;
-  font-family: 'Fauna One', serif;
+  font-family: 'Muli', sans-serif;
   font-size: 16px;
 }
 
@@ -27,7 +27,7 @@ body{
 
   .logo img{
     opacity: 0.75;
-    height: 55px;
+    height: 60px;
   }
 
 
@@ -41,7 +41,7 @@ body{
     display: inline-block;
 
     a {
-      padding: 18px 20px;
+      padding: 15px 20px;
       text-decoration: none;
       color: $grey;
     }

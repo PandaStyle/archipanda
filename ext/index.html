@@ -3,10 +3,8 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title></title>
-    <link href='https://fonts.googleapis.com/css?family=Questrial' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Playfair+Display:400,700,400italic,900,700italic' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Fauna+One' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
 
     <link rel="stylesheet" href="bower_components/normalize-css/normalize.css"/>
     <link rel="stylesheet" href="bower_components/salvattore/examples/salvattore.css"/>
@@ -31,11 +29,13 @@
 <body>
     <div class="navbar" ng-controller="atdController">
         <div class="logo">
-            <img src="img/logo_bold.png" alt=""/>
+            <img src="img/theCuratist-logo.png" alt=""/>
         </div>
         <ul class="menu">
-            <li ng-class="{ active: isActive('/feed')}"><a class="icon-feed"  href="#/feed"></a></li>
-            <li ng-class="{ active: isActive('/tumblr')}"><a class="icon-tumblr" href="#/tumblr"></a></li>
+            <li ng-class="{ active: isActive('/feed/design')}"><a class=""  href="#/feed/design">Design</a></li>
+            <li ng-class="{ active: isActive('/feed/technology')}"><a class=""  href="#/feed/technology">Tech</a></li>
+            <li ng-class="{ active: isActive('/feed/business')}"><a class=""  href="#/feed/business">Business</a></li>
+            <li ng-class="{ active: isActive('/tumblr')}"><a class="" href="#/tumblr">Inspiration</a></li>
         </ul>
         <div class="hamburger button_container" id="toggle">
             <span class="top"></span>

@@ -4,8 +4,17 @@ var s = [];
 
 angular.module('feed', ['ngRoute'])
 
+
     .config(['$routeProvider', function($routeProvider) {
-        $routeProvider.when('/feed', {
+        $routeProvider.when('/feed/design', {
+            templateUrl: 'views/feed/feed.html',
+            controller: 'feedCtrl'
+        });
+        $routeProvider.when('/feed/technology', {
+            templateUrl: 'views/feed/feed.html',
+            controller: 'feedCtrl'
+        });
+        $routeProvider.when('/feed/business', {
             templateUrl: 'views/feed/feed.html',
             controller: 'feedCtrl'
         });
@@ -13,8 +22,11 @@ angular.module('feed', ['ngRoute'])
 
     .factory('feedService', function($http){
         return {
+
             getPosts: function(offset, size) {
-                return $http.get('/feed/river');
+                var type = window.location.href.substring(window.location.href.lastIndexOf('/') + 1);
+
+                return $http.get('/feed/river/' + type);
             }
         }
     })

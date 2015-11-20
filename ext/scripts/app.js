@@ -5,7 +5,7 @@
         'instagram'
     ]).
     config(['$routeProvider', function($routeProvider) {
-        $routeProvider.otherwise({redirectTo: '/feed'});
+        $routeProvider.otherwise({redirectTo: '/feed/design'});
     }])
     .controller('atdController', ['$scope', '$location', function($scope, $location) {
 

@@ -3,15 +3,31 @@ var feed = require('feed-read');
 var moment = require('moment');
 var request = require('request');
 
-var riverUrl = require('./urls.js').riverUrl;
+var urls = require('./urls.js');
 
 var exported = module.exports = {};
 
 
-exported.getFeedFromRiver = function(callback){
+exported.getFeedFromRiver = function(type, callback){
     var feedtime = new Date();
+    var url;
 
-    request.get({url: riverUrl, json:true}, function (err, response, body) {
+    switch (type){
+        case "design": {
+            url = urls.designUrl;
+            break;
+        }
+        case "technology": {
+            url = urls.technologyUrl;
+            break;
+        }
+        case "business": {
+            url = urls.businessUrl;
+            break;
+        }
+    }
+
+    request.get({url: url, json:true}, function (err, response, body) {
         if (err) {
             console.log("Error happened during getFeedfromRiver: ", err);
             callback(err, response)
@@ -29,6 +45,8 @@ exported.getFeedFromRiver = function(callback){
             var res = _.map(body["updatedFeeds"]["updatedFeed"], function(elem){
                 var item = elem.item[0];
 
+                var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
+
                 return {
                     id: item.id,
                     summary: item.body,
@@ -36,8 +54,8 @@ exported.getFeedFromRiver = function(callback){
                     link: item.link,
                     feed: elem.feedTitle.split(' ')[0],
                     published: item.pubDate,
-                    image: item.image.src,
-                    diff: moment.duration(moment().diff(moment(new Date(item.pubDate)))).humanize(),
+                    image: item.image ? item.image.src : image_placeholder_url,
+                    diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
 
                     websiteUrl: elem.websiteUrl,
                     websiteDesc: elem.feedDescription,

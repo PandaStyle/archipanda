@@ -72,9 +72,9 @@ server.route({
 
 server.route({
     method: 'GET',
-    path:'/feed/river',
+    path:'/feed/river/{type}',
     handler: function (req, reply) {
-        FeedService.getFeedFromRiver(function(err, res, body) {
+        FeedService.getFeedFromRiver(req.params.type, function(err, res, body) {
             if (err) {
                 console.log("Error happened during getFeedfromRiver: ", err);
             }
