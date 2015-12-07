@@ -43,24 +43,40 @@ exported.getFeedFromRiver = function(type, callback){
             });
 
             var res = _.map(body["updatedFeeds"]["updatedFeed"], function(elem){
-                var item = elem.item[0];
 
                 var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
 
-                return {
-                    id: item.id,
-                    summary: item.body,
-                    title: item.title,
-                    link: item.link,
-                    feed: elem.feedTitle.split(' ')[0],
-                    published: item.pubDate,
-                    image: item.image ? item.image.src : image_placeholder_url,
-                    diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
+                return _.forEach(elem.item, function(item){
 
-                    websiteUrl: elem.websiteUrl,
-                    websiteDesc: elem.feedDescription,
-                    whenLastUpdate: elem.whenLastUpdate
-                }
+                    function getImage(){
+                        if(item.image) {
+                            return item.image.src;
+                        } else if(item.enclosure && item.enclosure[0].url) {
+                            return item.enclosure[0].url;
+                        } else {
+                            console.log(elem);
+                            return image_placeholder_url;
+                        }
+                    }
+
+                    return {
+                        id: item.id,
+                        summary: item.body,
+                        title: item.title,
+                        link: item.link,
+                        feed: elem.feedTitle.split(' ')[0],
+                        published: item.pubDate,
+                        image: getImage(),
+                        diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
+
+                        websiteUrl: elem.websiteUrl,
+                        websiteDesc: elem.feedDescription,
+                        whenLastUpdate: elem.whenLastUpdate
+                    }
+
+
+                })
+
             });
 
             console.log("callback in " +  ((new Date().getTime()) - (feedtime.getTime())) + ' ms');
