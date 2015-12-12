@@ -42,39 +42,38 @@ exported.getFeedFromRiver = function(type, callback){
                 }
             });
 
-            var res = _.map(body["updatedFeeds"]["updatedFeed"], function(elem){
+            var res = [];
 
-                var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
+            _.forEach(body["updatedFeeds"]["updatedFeed"], function(elem){
 
-                return _.forEach(elem.item, function(item){
+                function getImage(_item){
+                    var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
 
-                    function getImage(){
-                        if(item.image) {
-                            return item.image.src;
-                        } else if(item.enclosure && item.enclosure[0].url) {
-                            return item.enclosure[0].url;
-                        } else {
-                            console.log(elem);
-                            return image_placeholder_url;
-                        }
+                    if(_item.image) {
+                        return _item.image.src;
+                    } else if(_item.enclosure && _item.enclosure[0].url) {
+                        return _item.enclosure[0].url;
+                    } else {
+                        console.log(elem);
+                        return image_placeholder_url;
                     }
+                }
 
-                    return {
+                _.forEach(elem.item, function(item){
+                    res.push({
                         id: item.id,
                         summary: item.body,
                         title: item.title,
                         link: item.link,
                         feed: elem.feedTitle.split(' ')[0],
                         published: item.pubDate,
-                        image: getImage(),
+                        image: getImage(item),
                         diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
 
                         websiteUrl: elem.websiteUrl,
                         websiteDesc: elem.feedDescription,
                         whenLastUpdate: elem.whenLastUpdate
-                    }
-
-
+                    });
                 })
 
             });
