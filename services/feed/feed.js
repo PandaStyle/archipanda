@@ -25,6 +25,10 @@ exported.getFeedFromRiver = function(type, callback){
             url = urls.businessUrl;
             break;
         }
+        case "all": {
+            url = urls.allUrl;
+            break;
+        }
     }
 
     request.get({url: url, json:true}, function (err, response, body) {
@@ -34,8 +38,6 @@ exported.getFeedFromRiver = function(type, callback){
         }
 
         if (!err && response.statusCode == 200) {
-            console.log(" ------ Success --------"); // Show the HTML for the Google homepage.
-
             _.forEach(body["updatedFeeds"]["updatedFeed"], function(elem, key){
                 if(elem.item.lenght > 1){
                     console.log("more than 1 item in feed element");
@@ -54,7 +56,6 @@ exported.getFeedFromRiver = function(type, callback){
                     } else if(_item.enclosure && _item.enclosure[0].url) {
                         return _item.enclosure[0].url;
                     } else {
-                        console.log(elem);
                         return image_placeholder_url;
                     }
                 }
