@@ -58,10 +58,10 @@ server.register({
 
 server.route({
     method: 'GET',
-    path: '/{param*}',
+    path: '/website/{param*}',
     handler: {
         directory: {
-            path: path.join(__dirname, '/ext'),
+            path: path.join(__dirname, '/website'),
             index: true
         }
     }
