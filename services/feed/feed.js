@@ -66,7 +66,7 @@ exported.getFeedFromRiver = function(type, callback){
                         summary: item.body,
                         title: item.title,
                         link: item.link,
-                        feed: elem.feedTitle.split('-')[0],
+                        feed: elem.feedTitle ? elem.feedTitle.split('-')[0] : " ",
                         published: item.pubDate,
                         image: getImage(item),
                         diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
