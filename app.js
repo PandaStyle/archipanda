@@ -8,6 +8,7 @@ var path = require('path');
 var Inert = require('inert');
 var FeedParser = require('feedparser');
 var req = require('request');
+var CronJob = require('cron').CronJob;
 
 var FeedService = require('./services/feed/feed.js');
 var TumblrService = require('./services/tumblr/tumblr.js');
