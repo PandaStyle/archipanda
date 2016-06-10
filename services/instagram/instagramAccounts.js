@@ -1,13 +1,12 @@
 module.exports = [
     {
-
         name: "iarchitectures",
         id: '354550274',
-        "profile_picture": "https://scontent.cdninstagram.com/t51.2885-19/914764_1471863623061761_1419491431_a.jpg"
+        profile_picture: "https://scontent.cdninstagram.com/t51.2885-19/914764_1471863623061761_1419491431_a.jpg"
     },
     {
         name: "dezeen",
-        id: '316143993228668906',
+        id: '439932286',
         profile_picture: "https://scontent.cdninstagram.com/t51.2885-19/11821299_1036311776388519_2030907078_a.jpg"
     },
     {
@@ -52,7 +51,7 @@ module.exports = [
     },
     {
         name: "modern.architect",
-        id: "1940451527",
+        id: "1484550376",
         profile_picture: "https://scontent.cdninstagram.com/t51.2885-19/s150x150/12748427_1330539633638685_790668775_a.jpg"
     },
     {
@@ -79,11 +78,6 @@ module.exports = [
         name: "visualizing_architecture",
         id: "2952338887",
         profile_picture: "https://scontent.cdninstagram.com/t51.2885-19/s150x150/12748484_1517120361917303_767442204_a.jpg"
-    },
-    {
-        name: "archrecordmag",
-        id: "1518272448",
-        profile_picture: "https://scontent.cdninstagram.com/t51.2885-19/s150x150/13130031_1092051414195584_377517025_a.jpg"
     },
     {
         name: "render_nation",
