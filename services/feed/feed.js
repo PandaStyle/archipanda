@@ -25,6 +25,10 @@ exported.getFeedFromRiver = function(type, callback){
             url = urls.businessUrl;
             break;
         }
+        case "all": {
+            url = urls.allUrl;
+            break;
+        }
     }
 
     request.get({url: url, json:true}, function (err, response, body) {
@@ -34,33 +38,45 @@ exported.getFeedFromRiver = function(type, callback){
         }
 
         if (!err && response.statusCode == 200) {
-            console.log(" ------ Success --------"); // Show the HTML for the Google homepage.
-
             _.forEach(body["updatedFeeds"]["updatedFeed"], function(elem, key){
                 if(elem.item.lenght > 1){
                     console.log("more than 1 item in feed element");
                 }
             });
 
-            var res = _.map(body["updatedFeeds"]["updatedFeed"], function(elem){
-                var item = elem.item[0];
+            var res = [];
 
-                var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
+            _.forEach(body["updatedFeeds"]["updatedFeed"], function(elem){
 
-                return {
-                    id: item.id,
-                    summary: item.body,
-                    title: item.title,
-                    link: item.link,
-                    feed: elem.feedTitle.split(' ')[0],
-                    published: item.pubDate,
-                    image: item.image ? item.image.src : image_placeholder_url,
-                    diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
+                function getImage(_item){
+                    var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
 
-                    websiteUrl: elem.websiteUrl,
-                    websiteDesc: elem.feedDescription,
-                    whenLastUpdate: elem.whenLastUpdate
+                    if(_item.image) {
+                        return _item.image.src;
+                    } else if(_item.enclosure && _item.enclosure[0].url) {
+                        return _item.enclosure[0].url;
+                    } else {
+                        return image_placeholder_url;
+                    }
                 }
+
+                _.forEach(elem.item, function(item){
+                    res.push({
+                        id: item.id,
+                        summary: item.body,
+                        title: item.title,
+                        link: item.link,
+                        feed: elem.feedTitle ? elem.feedTitle.split('-')[0] : " ",
+                        published: item.pubDate,
+                        image: getImage(item),
+                        diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
+
+                        websiteUrl: elem.websiteUrl,
+                        websiteDesc: elem.feedDescription,
+                        whenLastUpdate: elem.whenLastUpdate
+                    });
+                })
+
             });
 
             console.log("callback in " +  ((new Date().getTime()) - (feedtime.getTime())) + ' ms');

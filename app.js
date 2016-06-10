@@ -39,6 +39,14 @@ server.register(require('vision'), function (err) {
     });
 });
 
+server.route({
+    method: 'GET',
+    path:'/ping',
+    handler: function (request, reply) {
+        reply("pong hahaha");
+    }
+});
+
 server.register({
     register: Good,
     options: {
@@ -59,10 +67,10 @@ server.register({
 
 server.route({
     method: 'GET',
-    path: '/{param*}',
+    path: '/website/{param*}',
     handler: {
         directory: {
-            path: path.join(__dirname, '/ext'),
+            path: path.join(__dirname, '/website'),
             index: true
         }
     }
