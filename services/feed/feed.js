@@ -61,19 +61,27 @@ exported.getFeedFromRiver = function(type, callback){
                         return image_placeholder_url;
                     }
                 }
-
+                
 
 
                 _.forEach(elem.item, function(item){
-                    console.log("----------")
-                    console.log( _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription)
+
+                    var ft = '';
+
+                    if(_.find(feedAccounts, { 'url': elem.websiteUrl})){
+                        ft = _.find(feedAccounts, { 'url': elem.websiteUrl}).name
+                    } else if(!_.isNull(elem.feedTitle)) {
+                        ft = elem.feedTitle.split('-')[0]
+                    } else {
+                        ft = "bdcnetwork"
+                    }
 
                     res.push({
                         id: item.id,
                         summary: item.body,
                         title: item.title,
                         link: item.link,
-                        feed: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedTitle.split('-')[0],
+                        feed: ft,
                         published: item.pubDate,
                         image: getImage(item),
                         diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
@@ -82,6 +90,7 @@ exported.getFeedFromRiver = function(type, callback){
                         websiteDesc: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription,
                         whenLastUpdate: elem.whenLastUpdate
                     });
+                    
                 })
 
             });
