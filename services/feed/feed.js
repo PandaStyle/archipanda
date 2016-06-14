@@ -4,6 +4,8 @@ var moment = require('moment');
 var request = require('request');
 
 var urls = require('./urls.js');
+var feedAccounts = require('./feedAccounts')
+
 
 var exported = module.exports = {};
 
@@ -60,19 +62,24 @@ exported.getFeedFromRiver = function(type, callback){
                     }
                 }
 
+
+
                 _.forEach(elem.item, function(item){
+                    console.log("----------")
+                    console.log( _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription)
+
                     res.push({
                         id: item.id,
                         summary: item.body,
                         title: item.title,
                         link: item.link,
-                        feed: elem.feedTitle ? elem.feedTitle.split('-')[0] : " ",
+                        feed: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedTitle.split('-')[0],
                         published: item.pubDate,
                         image: getImage(item),
                         diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
 
                         websiteUrl: elem.websiteUrl,
-                        websiteDesc: elem.feedDescription,
+                        websiteDesc: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription,
                         whenLastUpdate: elem.whenLastUpdate
                     });
                 })
