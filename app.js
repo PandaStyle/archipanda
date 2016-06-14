@@ -9,10 +9,13 @@ var Inert = require('inert');
 var FeedParser = require('feedparser');
 var req = require('request');
 var CronJob = require('cron').CronJob;
+var Joi = require('joi');
 
 var FeedService = require('./services/feed/feed.js');
 var TumblrService = require('./services/tumblr/tumblr.js');
 var instagram = require('./services/instagram/instagram.js');
+
+var buildingService = require('./services/lite/buildingService.js')
 
 
 // Create a server with a host and port
@@ -125,6 +128,28 @@ server.route({
             .catch(err => { throw err; reply(err)})
     }
 });
+
+
+server.route({
+    method: 'POST',
+    path:'/building',
+    config: {
+        validate: {
+            payload: {
+                link: Joi.string().required(),
+                img: Joi.string().required(),
+                title: Joi.string().required(),
+                source: Joi.string().required()
+            }
+        }
+    },
+    handler: function (request, reply) {
+        buildingService.saveBuilding(request.payload)
+            .then(res => { reply(res)})
+            .catch(err => { throw err; reply(err)})
+    }
+});
+
 
 
 
