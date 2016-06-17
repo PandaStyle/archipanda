@@ -46,6 +46,7 @@ exported.getFeedFromRiver = function(type, callback){
                 }
             });
 
+
             var res = [];
 
             _.forEach(body["updatedFeeds"]["updatedFeed"], function(elem){
@@ -53,16 +54,17 @@ exported.getFeedFromRiver = function(type, callback){
                 function getImage(_item){
                     var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
 
-                    if(_item.image) {
-                        return _item.image.src;
-                    } else if(_item.enclosure && _item.enclosure[0].url) {
-                        return _item.enclosure[0].url;
+                    if(_item.imageFromEnclosure) {
+                        return _item.imageFromEnclosure;
+                    } else if(_item.imageFromMeta) {
+                        return _item.imageFromMeta;
+                    } else if(_item.imageFromIneed && _item.imageFromIneed.src){
+                        return _item.imageFromIneed.src;
                     } else {
+                        console.log("No image represented for item: ", _item.link);
                         return image_placeholder_url;
                     }
                 }
-                
-
 
                 _.forEach(elem.item, function(item){
 
