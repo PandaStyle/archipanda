@@ -86,7 +86,7 @@ exported.getFeedFromRiver = function(type, callback){
                         feed: ft,
                         published: item.pubDate,
                         image: getImage(item),
-                        diff: moment.duration(moment().diff(moment(new Date(elem.whenLastUpdate)))).humanize(),
+                        diff: moment.duration(moment().diff(moment(new Date(item.pubDate)))).humanize(),
 
                         websiteUrl: elem.websiteUrl,
                         websiteDesc: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription,
@@ -97,8 +97,12 @@ exported.getFeedFromRiver = function(type, callback){
 
             });
 
+            //sort
+            var sorted = _.sortBy(res, 'published').reverse();
+
+
             console.log("callback in " +  ((new Date().getTime()) - (feedtime.getTime())) + ' ms');
-            callback(err, res, body);
+            callback(err, sorted, body);
 
         }
 
