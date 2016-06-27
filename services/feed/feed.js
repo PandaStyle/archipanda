@@ -84,7 +84,7 @@ exported.getFeedFromRiver = function(type, callback){
                         title: item.title,
                         link: item.link,
                         feed: ft,
-                        published: item.pubDate,
+                        published: new Date(item.pubDate),
                         image: getImage(item),
                         diff: moment.duration(moment().diff(moment(new Date(item.pubDate)))).humanize(),
 
