@@ -102,6 +102,19 @@ server.route({
 
 server.route({
     method: 'GET',
+    path:'/all',
+    handler:  (req, reply) => {
+        FeedService.getFeedFromDB('All').then( (res) => {
+            reply(res)
+        }).catch( error => {
+            console.error(error);
+        })
+    }
+});
+
+
+server.route({
+    method: 'GET',
     path:'/getposts/{offset}/{size}',
     handler: function (request, reply) {
         TumblrService.user.dashboard({offset: request.params.offset, limit: request.params.size, type: 'photo' }, function (error, response) {

@@ -6,6 +6,8 @@ var request = require('request');
 var urls = require('./urls.js');
 var feedAccounts = require('./feedAccounts')
 
+var DB = require('./db.js')
+
 
 var exported = module.exports = {};
 
@@ -92,7 +94,7 @@ exported.getFeedFromRiver = function(type, callback){
                         websiteDesc: _.find(feedAccounts, { 'url': elem.websiteUrl}) ? _.find(feedAccounts, { 'url': elem.websiteUrl}).name : elem.feedDescription,
                         whenLastUpdate: elem.whenLastUpdate
                     });
-                    
+
                 })
 
             });
@@ -111,6 +113,12 @@ exported.getFeedFromRiver = function(type, callback){
 
 };
 
+exported.getFeedFromDB = (type) => {
+    DB.getFeedByType(type);
+}
+
+
+exported.getAll = DB.getAll;
 
 
 
