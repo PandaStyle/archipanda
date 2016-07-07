@@ -1,3 +1,5 @@
+'use strict'
+
 var _ = require('lodash');
 var feed = require('feed-read');
 var moment = require('moment');
@@ -109,13 +111,23 @@ exported.getFeedFromRiver = function(type, callback){
         }
 
     });
-
-
 };
 
-exported.getFeedFromDB = (type) => {
-    DB.getFeedByType(type);
+exported.getFeedFromDB = (type, limit) => {
+    return DB.getFeedByType(type, limit).then(res => {
+        return res.map(i => {
+            var j = i.toObject();
+
+            //TODO
+            j.diff = moment.duration(moment().diff(moment(j.pubDate))).humanize()
+            j.feed = _.find(feedAccounts, { 'id': j.feedId}).name
+
+            return j
+        })
+    })
 }
+
+
 
 
 exported.getAll = DB.getAll;

@@ -1,5 +1,6 @@
 var Hapi = require('hapi');
 var Good = require('good');
+var mongoose = require('mongoose');
 var feed = require('feed-read');
 var _ = require('lodash');
 var moment = require('moment');
@@ -17,6 +18,7 @@ var instagram = require('./services/instagram/instagram.js');
 
 var buildingService = require('./services/lite/buildingService.js')
 
+mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 // Create a server with a host and port
 var server = new Hapi.Server();
@@ -102,9 +104,11 @@ server.route({
 
 server.route({
     method: 'GET',
-    path:'/all',
+    path:'/feed/{type}/{size}',
     handler:  (req, reply) => {
-        FeedService.getFeedFromDB('All').then( (res) => {
+        console.log( req.params.size);
+        
+        FeedService.getFeedFromDB(req.params.type, parseInt(req.params.size)).then( (res) => {
             reply(res)
         }).catch( error => {
             console.error(error);

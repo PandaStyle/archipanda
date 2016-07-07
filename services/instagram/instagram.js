@@ -8,7 +8,6 @@ var mongoose = require('mongoose');
 var instagramAccounts = require('./instagramAccounts')
 
 mongoose.Promise = require('bluebird');
-mongoose.connect('mongodb://127.0.0.1:27017/test');
 
 
 _.mixin({
