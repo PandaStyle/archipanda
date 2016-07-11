@@ -17,7 +17,7 @@ const getFeedByType = (type, limit) => {
     var feedIds = feedTypes.get(type);
 
     return Feed.find({feedId: {$in: feedIds}})
-                .sort({pubDate: 'asc'})
+                .sort({pubDate: 'desc'})
                 .limit(limit)
 }
 
