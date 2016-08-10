@@ -133,6 +133,26 @@ exported.getFeedFromRiver = function(type, callback){
     });
 };
 
+const normalizeImage =  (item) => {
+    var image = null
+
+    if(item.image && item.image.src) {
+        if (item.feedId == 13) {
+            image = "http://abduzeedo.com" + item.image.src;
+        } else {
+            image = item.image.src
+        }
+    } else if(image && image.url){
+        image = item.image.url
+    } else if (image == "" || !item.image) {
+        image = null;
+    } else {
+        console.log("No image url after pipe: ", item.link)
+    }
+
+    return image;
+}
+
 exported.getFeedFromDB = (type, limit) => {
     return DB.getFeedByType(type, limit).then(res => {
         return res.map(i => {
@@ -141,6 +161,8 @@ exported.getFeedFromDB = (type, limit) => {
             //TODO
             j.diff = moment.duration(moment().diff(moment(j.pubDate))).humanize()
             j.feed = _.find(feedAccounts, { 'id': j.feedId}).name
+
+            j.image = normalizeImage(j);
 
             return j
         })
