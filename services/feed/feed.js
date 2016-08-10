@@ -58,16 +58,36 @@ exported.getFeedFromRiver = function(type, callback){
                 function getImage(_item){
                     var image_placeholder_url = "http://www.engraversnetwork.com/files/placeholder.jpg";
 
+                    var image = null;
+
                     if(_item.imageFromEnclosure) {
-                        return _item.imageFromEnclosure;
+                        image =  _item.imageFromEnclosure;
                     } else if(_item.imageFromMeta) {
-                        return _item.imageFromMeta;
+                        image = _item.imageFromMeta;
                     } else if(_item.imageFromIneed && _item.imageFromIneed.src){
-                        return _item.imageFromIneed.src;
+                        image = _item.imageFromIneed.src;
                     } else {
                         console.log("No image represented for item: ", _item.link);
-                        return image_placeholder_url;
+                        image =  image_placeholder_url;
                     }
+
+                    //take out "" and nulls, and {src: ...} s
+                    //SITE SPECIFIC IMPLEMENTATION
+                    if(image && image.src) {
+                        if (_item.feedId == 13) {
+                            image = "http://abduzeedo.com" + image.src;
+                        } else {
+                            image = image.src
+                        }
+                    } else if(image && image.url){
+                            image = image.url
+                    } else if (image == "" || !item.image) {
+                        image = null;
+                    } else {
+                        console.log("No image url after pipe: ", _item.link)
+                    }
+
+                    return image;
                 }
 
                 _.forEach(elem.item, function(item){
