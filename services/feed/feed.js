@@ -142,12 +142,12 @@ const normalizeImage =  (item) => {
         } else {
             image = item.image.src
         }
-    } else if(image && image.url){
+    } else if(item.image && item.image.url){
         image = item.image.url
-    } else if (image == "" || !item.image) {
+    } else if (item.image == "" || !item.image) {
         image = null;
     } else {
-        console.log("No image url after pipe: ", item.link)
+        console.log("No image url after normalizeImage pipe: ", item)
     }
 
     return image;
