@@ -147,7 +147,7 @@ const normalizeImage =  (item) => {
     } else if (item.image == "" || !item.image) {
         image = null;
     } else {
-        console.log("No image url after normalizeImage pipe: ", item)
+        image = item.image;
     }
 
     return image;
