@@ -1,7 +1,10 @@
+'use strict'
+
 const
     mongoose = require('mongoose'),
     Schema = mongoose.Schema,
-    feedTypes = require('./feedTypes');
+    feedTypes = require('./feedTypes'),
+    _ = require('lodash');
 
 
 mongoose.Promise = require('bluebird');
@@ -21,7 +24,18 @@ const getFeedByType = (type, limit) => {
                 .limit(limit)
 }
 
+const getFeedByTypeEx = (type, limit, exludedFeedIds) => {
+    var feedIds = feedTypes.get(type);
+
+    let substarctedFeedIdList = _.difference(feedIds, exludedFeedIds)
+
+    return Feed.find({feedId: {$in: substarctedFeedIdList}})
+        .sort({pubDate: 'desc'})
+        .limit(limit)
+}
+
 
 module.exports = {
-    getFeedByType: getFeedByType
+    getFeedByType: getFeedByType,
+    getFeedByTypeEx: getFeedByTypeEx
 }

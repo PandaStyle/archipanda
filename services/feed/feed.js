@@ -169,6 +169,22 @@ exported.getFeedFromDB = (type, limit) => {
     })
 }
 
+exported.getFeedFromDBEx = (type, limit, exluded) => {
+    return DB.getFeedByTypeEx(type, limit, exluded).then(res => {
+        return res.map(i => {
+            var j = i.toObject();
+
+            //TODO
+            j.diff = moment.duration(moment().diff(moment(j.pubDate))).humanize()
+            j.feed = _.find(feedAccounts, { 'id': j.feedId}).name
+
+            j.image = normalizeImage(j);
+
+            return j
+        })
+    })
+}
+
 
 
 

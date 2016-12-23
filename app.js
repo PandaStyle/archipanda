@@ -1,3 +1,5 @@
+'use strict'
+
 var Hapi = require('hapi');
 var Good = require('good');
 var mongoose = require('mongoose');
@@ -109,6 +111,23 @@ server.route({
         console.log( req.params.size);
         
         FeedService.getFeedFromDB(req.params.type, parseInt(req.params.size)).then( (res) => {
+            reply(res)
+        }).catch( error => {
+            console.error(error);
+        })
+    }
+});
+
+server.route({
+    method: 'POST',
+    path:'/feed',
+    handler:  (req, reply) => {
+        let type = req.payload.type,
+            size = req.payload.size;
+
+        let excludedFeeds =  req.payload.excluded ? JSON.parse(req.payload.excluded) : [];
+
+        FeedService.getFeedFromDBEx(type, parseInt(size), excludedFeeds).then( (res) => {
             reply(res)
         }).catch( error => {
             console.error(error);
